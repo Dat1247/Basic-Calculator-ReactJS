@@ -10,7 +10,13 @@ export default function Calculator(props) {
 	const renderDigits = () => {
 		return digits.map((item, index) => {
 			const gridClass =
-				item === "=" ? "item-equal" : item === "+" ? "item-plus" : "";
+				item === "="
+					? "item-equal"
+					: item === "+"
+					? "item-plus"
+					: item === "CE"
+					? "item-clearAll"
+					: "";
 			return (
 				<KeyButton
 					key={index}
@@ -175,6 +181,9 @@ const Container = styled.div`
 	border: 1px solid black;
 	border-radius: 10px;
 	padding: 2rem 1.5rem;
+	z-index: 10;
+	backdrop-filter: blur(10px);
+	background-color: rgba(0, 0, 0, 0.2);
 `;
 
 const Screenshot = styled.div`
@@ -217,13 +226,16 @@ const ButtonGroup = styled.div`
 
 const KeyButton = styled.button`
 	padding: 1rem;
+	font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+		"Lucida Sans", Arial, sans-serif;
 	border: 1px solid black;
 	border-radius: 50%;
 	font-size: 1.1rem;
 	cursor: pointer;
 	transition: all 0.5s;
 	&:hover {
-		color: red;
+		background-color: rgb(168, 196, 219);
+		color: white;
 		box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
 	}
 
@@ -235,5 +247,8 @@ const KeyButton = styled.button`
 	&.item-equal {
 		grid-column-start: 3;
 		grid-column-end: 5;
+	}
+	&.item-clearAll:hover {
+		color: red;
 	}
 `;
